@@ -29,13 +29,9 @@ export default function Gallery() {
 
 	return (
 		<>
-			<div className="flex flex-wrap gap-[0.5rem]">
+			<div className="flex flex-wrap gap-[0.5rem] justify-center relative">
 				{data.map((img, index) => (
-					<div
-						key={index}
-						className="relative flex justify-center"
-						onClick={() => handleClick(index)}
-					>
+					<div key={index} onClick={() => handleClick(index)}>
 						<SingleImg src={img.url} alt={img.alt} />
 					</div>
 				))}
@@ -45,6 +41,7 @@ export default function Gallery() {
 						src={bigImage.url}
 						alt={bigImage.alt}
 						title={bigImage.title}
+						close={() => setModal(false)}
 					/>
 				) : null}
 			</div>
