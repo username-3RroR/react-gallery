@@ -17,21 +17,24 @@ export default function Gallery() {
 	}, []);
 
 	const [modal, setModal] = useState(false);
-	const [currentIndex, setCurrentIndex] = useState(null);
+	const [currentIndex, setCurrentIndex] = useState(0);
 
-	function handleClick(i) {
+	function handleClick(index) {
 		setModal(!modal);
-		setCurrentIndex(i);
+		setCurrentIndex(index);
+		// console.log(bigImage);
 	}
+
+	let bigImage = data[currentIndex];
 
 	return (
 		<>
 			<div className="flex flex-wrap gap-[0.5rem]">
-				{data.map((img, i) => (
+				{data.map((img, index) => (
 					<div
-						key={i}
+						key={index}
 						className="relative flex justify-center"
-						onClick={() => handleClick(img.url, img.alt, img.title)}
+						onClick={() => handleClick(index)}
 					>
 						<SingleImg src={img.url} alt={img.alt} />
 					</div>
@@ -39,9 +42,9 @@ export default function Gallery() {
 
 				{modal ? (
 					<OpenModal
-						src={currentIndex}
-						alt={currentIndex}
-						title={currentIndex}
+						src={bigImage.url}
+						alt={bigImage.alt}
+						title={bigImage.title}
 					/>
 				) : null}
 			</div>
