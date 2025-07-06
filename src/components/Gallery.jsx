@@ -17,33 +17,34 @@ export default function Gallery() {
 	}, []);
 
 	const [modal, setModal] = useState(false);
+	const [currentIndex, setCurrentIndex] = useState(null);
 
-	const [selectedImg, setSelectedImg] = useState(0);
-
-	function handleClick() {
+	function handleClick(i) {
 		setModal(!modal);
-		setSelectedImg({ selectedImg });
+		setCurrentIndex(i);
 	}
 
 	return (
-		<div className="flex flex-wrap gap-[0.5rem]">
-			{data.map((img) => (
-				<div
-					className="relative flex justify-center"
-					onClick={handleClick}
-				>
-					<SingleImg key={img.id} src={img.url} alt={img.alt} />
-				</div>
-			))}
+		<>
+			<div className="flex flex-wrap gap-[0.5rem]">
+				{data.map((img, i) => (
+					<div
+						key={i}
+						className="relative flex justify-center"
+						onClick={() => handleClick(img.url, img.alt, img.title)}
+					>
+						<SingleImg src={img.url} alt={img.alt} />
+					</div>
+				))}
 
-			{modal ? (
-				<OpenModal
-					key={img.id}
-					src={img.url}
-					alt={img.alt}
-					title={img.title}
-				/>
-			) : null}
-		</div>
+				{modal ? (
+					<OpenModal
+						src={currentIndex}
+						alt={currentIndex}
+						title={currentIndex}
+					/>
+				) : null}
+			</div>
+		</>
 	);
 }
